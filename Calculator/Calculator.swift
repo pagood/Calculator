@@ -9,43 +9,46 @@
 import Foundation
 class Calculator{
     var opStack:Stack<String>
-    var stack:Stack<Int>
-    var temp:Int
+    var stack:Stack<Double>
+    var res:String
     var screen:String
     var pre:String
     init(){
         self.opStack = Stack<String>()
-        self.stack = Stack<Int>()
-        self.temp = 0
+        self.stack = Stack<Double>()
         self.screen = "0"
         self.pre = "="
+        self.res = ""
     }
     func test(){
         print(stack.peek())
     }
-    func enterDigit(digit:Int){
+
+    func enterDigit(digit:String){
         if(pre == "="){
-            temp = 0
+            res = ""
         }
-        temp = temp * 10 + digit
-        screen = String(temp)
-        pre = String(digit)
+        res = res + digit
+        screen = res
+        pre = digit
     }
     func equ(){
-        stack.push(temp)
-        temp = 0
-        while stack.size() > 1 && opStack.size() > 0{
-            var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
-            stack.push(n)
+        if(pre != "-"){
+            let str = NSString(string: res)
+            stack.push(str.doubleValue)
+            while stack.size() > 1 && opStack.size() > 0{
+                var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
+                stack.push(n)
+            }
+            res = helperToString(stack.pop())
+            screen = res
+            pre = "="
         }
-        temp = stack.pop()
-        screen = String(temp)
-        pre = "="
     }
     func clear(){
         stack.removeAll()
         opStack.removeAll()
-        temp = 0
+        res = ""
         screen = "0"
         pre = ""
     }
@@ -55,79 +58,91 @@ class Calculator{
             opStack.pop()
             opStack.push("+")
         }
-        stack.push(temp)
-        temp = 0
-        while stack.size() > 1 && opStack.size() > 0{
-            var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
-            stack.push(n)
+        else{
+            let str = NSString(string: res)
+            stack.push(str.doubleValue)
+            res = ""
+            while stack.size() > 1 && opStack.size() > 0{
+                var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
+                stack.push(n)
+            }
+            opStack.push("+")
+            screen = stack.size() > 0 ? helperToString(stack.peek()) : "0"
+            pre = "+"
         }
-        opStack.push("+")
-        screen = stack.size() > 0 ? String(stack.peek()) : "0"
-        pre = "+"
     }
     func sub(){
         if(pre == "+" || pre == "-" || pre == "*" || pre == "/"){
             opStack.pop()
             opStack.push("-")
         }
-        stack.push(temp)
-        temp = 0
-        while stack.size() > 1 && opStack.size() > 0{
-            var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
-            stack.push(n)
+        else{
+            let str = NSString(string: res)
+            stack.push(str.doubleValue)
+            res = ""
+            while stack.size() > 1 && opStack.size() > 0{
+                var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
+                stack.push(n)
+            }
+            opStack.push("-")
+            screen = stack.size() > 0 ? helperToString(stack.peek())  : "0"
+            pre = "-"
         }
-        opStack.push("-")
-        screen = stack.size() > 0 ? String(stack.peek()) : "0"
-        pre = "-"
     }
     func mul(){
         if(pre == "+" || pre == "-" || pre == "*" || pre == "/"){
             opStack.pop()
             opStack.push("*")
         }
-        stack.push(temp)
-        temp = 0
-        if stack.size() > 1 && opStack.size() > 0{
-            if opStack.peek() == "+" || opStack.peek() == "-"{
-                opStack.push("*")
+        else{
+            let str = NSString(string: res)
+            stack.push(str.doubleValue)
+            res = ""
+            if stack.size() > 1 && opStack.size() > 0{
+                if opStack.peek() == "+" || opStack.peek() == "-"{
+                    opStack.push("*")
+                }
+                else{
+                    var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
+                    stack.push(n)
+                    opStack.push("*")
+                }
             }
             else{
-                var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
-                stack.push(n)
                 opStack.push("*")
             }
+            screen = stack.size() > 0 ? helperToString(stack.peek())  : "0"
+            pre = "*"
         }
-        else{
-            opStack.push("*")
-        }
-        screen = stack.size() > 0 ? String(stack.peek()) : "0"
-        pre = "*"
     }
     func dev(){
         if(pre == "+" || pre == "-" || pre == "*" || pre == "/"){
             opStack.pop()
             opStack.push("/")
         }
-        stack.push(temp)
-        temp = 0
-        if stack.size() > 1 && opStack.size() > 0{
-            if opStack.peek() == "+" || opStack.peek() == "-"{
-                opStack.push("/")
+        else{
+            let str = NSString(string: res)
+            stack.push(str.doubleValue)
+            res = ""
+            if stack.size() > 1 && opStack.size() > 0{
+                if opStack.peek() == "+" || opStack.peek() == "-"{
+                    opStack.push("/")
+                }
+                else{
+                    var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
+                    stack.push(n)
+                    opStack.push("/")
+                }
             }
             else{
-                var n = helper(stack.pop(), num2: stack.pop(), op: opStack.pop())
-                stack.push(n)
                 opStack.push("/")
             }
+            screen = stack.size() > 0 ? helperToString(stack.peek())  : "0"
+            pre = "/"
         }
-        else{
-            opStack.push("/")
-        }
-        screen = stack.size() > 0 ? String(stack.peek()) : "0"
-        pre = "/"
     }
-    func helper(num1:Int,num2:Int,op:String) -> Int{
-        var ans:Int
+    func helper(num1:Double,num2:Double,op:String) -> Double{
+        var ans:Double
         switch op{
         case "+":
             ans = num2 + num1
@@ -145,5 +160,36 @@ class Calculator{
             ans = 0
         }
         return ans
+    }
+    func helperToString(num:Double) -> String{
+        var dif:Double = num - Double(Int(num))
+        if dif > 0 || dif < 0{
+        //dont need to
+                return num.description
+        }
+        else{
+            return String(Int(num))
+        }
+        
+    }
+    func getNeg(){
+        if(pre != "+" && pre != "-" && pre != "*" && pre != "/"){
+            let str = NSString(string: res)
+            if str.doubleValue > 0{
+                res = "-" + res
+                screen = res
+            }
+            else if str.doubleValue < 0{
+                res = str.substringFromIndex(1)
+                screen = res
+            }
+        }
+        else{
+            let temp = stack.pop() * (-1)
+            stack.push(temp)
+            screen = helperToString(temp)
+            
+            
+        }
     }
 }

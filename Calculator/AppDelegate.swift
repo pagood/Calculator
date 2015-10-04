@@ -14,43 +14,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     @IBOutlet var textField:NSTextField!
     @IBAction func pressOne(sender:AnyObject){
-        self.calculator.enterDigit(1)
+        self.calculator.enterDigit("1")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressTwo(sender:AnyObject){
-        self.calculator.enterDigit(2)
+        self.calculator.enterDigit("2")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressThree(sender:AnyObject){
-        self.calculator.enterDigit(3)
+        self.calculator.enterDigit("3")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressFour(sender:AnyObject){
-        self.calculator.enterDigit(4)
+        self.calculator.enterDigit("4")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressFive(sender:AnyObject){
-        self.calculator.enterDigit(5)
+        self.calculator.enterDigit("5")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressSix(sender:AnyObject){
-        self.calculator.enterDigit(6)
+        self.calculator.enterDigit("6")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressSeven(sender:AnyObject){
-        self.calculator.enterDigit(7)
+        self.calculator.enterDigit("7")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressEight(sender:AnyObject){
-        self.calculator.enterDigit(8)
+        self.calculator.enterDigit("8")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressNine(sender:AnyObject){
-        self.calculator.enterDigit(9)
+        self.calculator.enterDigit("9")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressZero(sender:AnyObject){
-        self.calculator.enterDigit(0)
+        self.calculator.enterDigit("0")
         self.textField.stringValue = self.calculator.screen
     }
     @IBAction func pressAdd(sender:AnyObject){
@@ -75,6 +75,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     @IBAction func pressClear(sender:AnyObject){
         self.calculator.clear()
+        self.textField.stringValue = self.calculator.screen
+    }
+    @IBAction func pressPoint(sender:AnyObject){
+        self.calculator.enterDigit(".")
+        self.textField.stringValue = self.calculator.screen
+    }
+    @IBAction func pressNeg(sender:AnyObject){
+        self.calculator.getNeg()
         self.textField.stringValue = self.calculator.screen
     }
     override func awakeFromNib() {
