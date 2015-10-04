@@ -13,12 +13,16 @@ class Calculator{
     var res:String
     var screen:String
     var pre:String
+    var m:Double
+    var op:String
     init(){
         self.opStack = Stack<String>()
         self.stack = Stack<Double>()
         self.screen = "0"
         self.pre = "="
         self.res = ""
+        self.m = 0
+        self.op = ""
     }
     func test(){
         print(stack.peek())
@@ -33,7 +37,7 @@ class Calculator{
         pre = digit
     }
     func equ(){
-        if(pre != "-"){
+        if(pre != "="){
             let str = NSString(string: res)
             stack.push(str.doubleValue)
             while stack.size() > 1 && opStack.size() > 0{
@@ -44,6 +48,7 @@ class Calculator{
             screen = res
             pre = "="
         }
+        op = ""
     }
     func clear(){
         stack.removeAll()
@@ -51,6 +56,7 @@ class Calculator{
         res = ""
         screen = "0"
         pre = ""
+        op = ""
     }
 
     func add(){
@@ -67,9 +73,10 @@ class Calculator{
                 stack.push(n)
             }
             opStack.push("+")
-            screen = stack.size() > 0 ? helperToString(stack.peek()) : "0"
+            screen = stack.size() > 0 ? helperToString(stack.peek()) : ""
             pre = "+"
         }
+        op = "+"
     }
     func sub(){
         if(pre == "+" || pre == "-" || pre == "*" || pre == "/"){
@@ -85,9 +92,10 @@ class Calculator{
                 stack.push(n)
             }
             opStack.push("-")
-            screen = stack.size() > 0 ? helperToString(stack.peek())  : "0"
+            screen = stack.size() > 0 ? helperToString(stack.peek())  : ""
             pre = "-"
         }
+        op = "-"
     }
     func mul(){
         if(pre == "+" || pre == "-" || pre == "*" || pre == "/"){
@@ -111,9 +119,10 @@ class Calculator{
             else{
                 opStack.push("*")
             }
-            screen = stack.size() > 0 ? helperToString(stack.peek())  : "0"
+            screen = stack.size() > 0 ? helperToString(stack.peek())  : ""
             pre = "*"
         }
+        op = "*"
     }
     func dev(){
         if(pre == "+" || pre == "-" || pre == "*" || pre == "/"){
@@ -137,9 +146,10 @@ class Calculator{
             else{
                 opStack.push("/")
             }
-            screen = stack.size() > 0 ? helperToString(stack.peek())  : "0"
+            screen = stack.size() > 0 ? helperToString(stack.peek())  : ""
             pre = "/"
         }
+        op = "/"
     }
     func helper(num1:Double,num2:Double,op:String) -> Double{
         var ans:Double
@@ -190,6 +200,26 @@ class Calculator{
             screen = helperToString(temp)
             
             
+        }
+    }
+    func mr(){
+        res = helperToString(m)
+        screen = res
+        pre = "1"
+    }
+    func mc(){
+        m = 0
+    }
+    func mAdd(){
+        if(screen != ""){
+            let str = NSString(string:screen)
+            m = m + str.doubleValue
+        }
+    }
+    func mSub(){
+        if(screen != ""){
+            let str = NSString(string:screen)
+            m = m - str.doubleValue
         }
     }
 }

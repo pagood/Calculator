@@ -14,6 +14,8 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Calculator" customModuleProvider="target">
             <connections>
+                <outlet property="mField" destination="cqk-eW-wzH" id="WpR-yN-0sF"/>
+                <outlet property="opField" destination="7PR-P9-jbt" id="NFS-cg-g1B"/>
                 <outlet property="textField" destination="ONG-yI-GMx" id="2oy-5d-lqP"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -806,6 +808,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="pressMc:" target="Voe-Tx-rLC" id="VIr-OL-8yf"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOf-Q4-UsZ">
                         <rect key="frame" x="58" y="35" width="48" height="31"/>
@@ -853,6 +858,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="pressMAdd:" target="Voe-Tx-rLC" id="feC-ZF-7Cf"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HHs-PD-Cv3">
                         <rect key="frame" x="107" y="159" width="48" height="31"/>
@@ -860,6 +868,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="pressMSub:" target="Voe-Tx-rLC" id="wZk-N7-14Y"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I4g-7X-5MS">
                         <rect key="frame" x="107" y="128" width="48" height="31"/>
@@ -887,6 +898,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="pressMr:" target="Voe-Tx-rLC" id="6fe-ty-zsi"/>
+                        </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONG-yI-GMx">
                         <rect key="frame" x="14" y="212" width="182" height="47"/>
@@ -894,6 +908,22 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" red="0.89781875464359961" green="1" blue="0.62501803220886587" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqk-eW-wzH">
+                        <rect key="frame" x="20" y="214" width="37" height="18"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" userInterfaceLayoutDirection="rightToLeft" alignment="left" drawsBackground="YES" id="llb-Nh-sqe">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" red="0.89781875460000005" green="1" blue="0.62501803219999996" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7PR-P9-jbt">
+                        <rect key="frame" x="58" y="214" width="37" height="18"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" userInterfaceLayoutDirection="rightToLeft" alignment="right" drawsBackground="YES" id="XfR-y2-tbF">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" red="0.89781875460000005" green="1" blue="0.62501803219999996" alpha="1" colorSpace="calibratedRGB"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
@@ -943,5 +973,13 @@
             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
             <font key="font" metaFont="system"/>
         </buttonCell>
+        <customObject id="th6-Zi-dxh" customClass="AppDelegate" customModule="Calculator" customModuleProvider="target">
+            <connections>
+                <outlet property="mField" destination="cqk-eW-wzH" id="SE5-vJ-A3G"/>
+                <outlet property="opField" destination="7PR-P9-jbt" id="QG5-G7-tPZ"/>
+                <outlet property="textField" destination="ONG-yI-GMx" id="Rht-uI-Mbr"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="WQD-1L-nGd"/>
+            </connections>
+        </customObject>
     </objects>
 </document>

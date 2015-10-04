@@ -13,6 +13,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let calculator:Calculator
     @IBOutlet weak var window: NSWindow!
     @IBOutlet var textField:NSTextField!
+    @IBOutlet var mField:NSTextField!
+    @IBOutlet var opField:NSTextField!
     @IBAction func pressOne(sender:AnyObject){
         self.calculator.enterDigit("1")
         self.textField.stringValue = self.calculator.screen
@@ -56,26 +58,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func pressAdd(sender:AnyObject){
         self.calculator.add()
         self.textField.stringValue = self.calculator.screen
+        self.opField.stringValue = self.calculator.op
     }
     @IBAction func pressSub(sender:AnyObject){
         self.calculator.sub()
         self.textField.stringValue = self.calculator.screen
+        self.opField.stringValue = self.calculator.op
     }
     @IBAction func pressMul(sender:AnyObject){
         self.calculator.mul()
         self.textField.stringValue = self.calculator.screen
+        self.opField.stringValue = self.calculator.op
     }
     @IBAction func pressDev(sender:AnyObject){
         self.calculator.dev()
         self.textField.stringValue = self.calculator.screen
+        self.opField.stringValue = self.calculator.op
     }
     @IBAction func pressEqu(sender:AnyObject){
         self.calculator.equ()
         self.textField.stringValue = self.calculator.screen
+        self.opField.stringValue = self.calculator.op
     }
     @IBAction func pressClear(sender:AnyObject){
         self.calculator.clear()
         self.textField.stringValue = self.calculator.screen
+        self.opField.stringValue = self.calculator.op
     }
     @IBAction func pressPoint(sender:AnyObject){
         self.calculator.enterDigit(".")
@@ -83,6 +91,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     @IBAction func pressNeg(sender:AnyObject){
         self.calculator.getNeg()
+        self.textField.stringValue = self.calculator.screen
+    }
+    @IBAction func pressMr(sender:AnyObject){
+        self.calculator.mr()
+        self.textField.stringValue = self.calculator.screen
+    }
+    @IBAction func pressMc(sender:AnyObject){
+        self.calculator.mc()
+        self.mField.stringValue = ""
+        self.textField.stringValue = self.calculator.screen
+    }
+    @IBAction func pressMAdd(sender:AnyObject){
+        self.calculator.mAdd()
+        self.mField.stringValue = "M"
+        self.textField.stringValue = self.calculator.screen
+    }
+    @IBAction func pressMSub(sender:AnyObject){
+        self.calculator.mSub()
         self.textField.stringValue = self.calculator.screen
     }
     override func awakeFromNib() {
